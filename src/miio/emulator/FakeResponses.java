@@ -12,6 +12,14 @@ public enum FakeResponses {
     P6("buzzer", "off"),
     P7("f1_hour", 33),
     P8("temp_dec", 21),
+    P9("favorite_level", 21),
+    P10("bright", 21),
+    P11("filter1_life", 21),
+    P12("f1_hour_used", 21),
+    P13("use_time", 21),
+    P14("led", 21),
+    P15("led_b", 21),
+    // P13("led_b", 21),
     UNKNOWN("", JsonNull.INSTANCE);
 
     private final String command;

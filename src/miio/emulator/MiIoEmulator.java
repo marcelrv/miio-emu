@@ -1,7 +1,5 @@
 package miio.emulator;
 
-import static miio.emulator.MiIoDevices.AIR_PURIFIER;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.SocketAddress;
@@ -27,11 +25,12 @@ public class MiIoEmulator implements MiIoMessageListener {
     byte[] did = Utils.hexStringToByteArray("AABBCCDD");
     byte[] token = Utils.hexStringToByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
-    private final static MiIoDevices EMULATED_DEVICE = AIR_PURIFIER;
+    // private final static MiIoDevices EMULATED_DEVICE = AIR_PURIFIER;
+    private final static MiIoDevices EMULATED_DEVICE = MiIoDevices.POWERPLUG;
 
     public void start() {
 
-        comms = new MiIoReceiver(null, token, did, 0);
+        comms = new MiIoReceiver();
         comms.registerListener(this);
         logger.info("Started listener co ");
 
