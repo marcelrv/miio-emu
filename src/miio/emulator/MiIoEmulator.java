@@ -1,3 +1,19 @@
+/**
+ * Mi IO device emulator Copyright (C) 2017  M. Verpaalen
+ *
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 package miio.emulator;
 
 import java.io.IOException;
@@ -20,20 +36,25 @@ import com.google.gson.JsonSyntaxException;
 public class MiIoEmulator implements MiIoMessageListener {
     private final static org.slf4j.Logger logger = LoggerFactory.getLogger(MiIoEmulator.class);
     private MiIoReceiver comms;
-    private JsonParser parser = new JsonParser();
+    private final JsonParser parser = new JsonParser();
 
-    byte[] did = Utils.hexStringToByteArray("AABBCCDD");
-    byte[] token = Utils.hexStringToByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    private byte[] did = Utils.hexStringToByteArray("AABBCCDD");
+    private byte[] token = Utils.hexStringToByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
     // private final static MiIoDevices EMULATED_DEVICE = AIR_PURIFIER;
-    private final static MiIoDevices EMULATED_DEVICE = MiIoDevices.POWERPLUG;
+    private final MiIoDevices emulatedDevice;
+
+    public MiIoEmulator(MiIoDevices emulatedDevice, String did, String token) {
+        this.emulatedDevice = emulatedDevice;
+        this.did = Utils.hexStringToByteArray(did);
+        this.token = Utils.hexStringToByteArray(token);
+    }
 
     public void start() {
-
         comms = new MiIoReceiver();
         comms.registerListener(this);
-        logger.info("Started listener co ");
-
+        logger.info("Mi Io Emulator started as device {} ({})", emulatedDevice.getDescription(),
+                emulatedDevice.getModel());
     }
 
     @Override
@@ -104,7 +125,7 @@ public class MiIoEmulator implements MiIoMessageListener {
                 case MIIO_INFO:
                     String res = "{\"life\":88749,\"cfg_time\":0,\"token\":\"" + Utils.getHex(token)
                             + "\",\"mac\":\"34:CE:00:84:D6:AA\",\"fw_ver\":\"1.2.4_59\",\"hw_ver\":\"MC200\",\"model\":\""
-                            + EMULATED_DEVICE.getModel()
+                            + emulatedDevice.getModel()
                             + "\",\"wifi_fw_ver\":\"SD878x-14.76.36.p79-702.1.0-WM\",\"ap\":{\"rssi\":-36,\"ssid\":\"here\",\"bssid\":\"34:81:C4:24:29:BB\"},\"netif\":{\"localIp\":\"192.168.1.73\",\"mask\":\"255.255.255.0\",\"gw\":\"192.168.1.199\"},\"mmfree\":27272,\"ot\":\"otu\",\"otu_stat\":[307,292,247,0,247,419],\"ott_stat\":[0,0,0,0]}";
                     fullCommand.add("result", parser.parse(res).getAsJsonObject());
                     break;
@@ -149,5 +170,9 @@ public class MiIoEmulator implements MiIoMessageListener {
             e.printStackTrace();
         }
 
+    }
+
+    public void stop() {
+        comms.close();
     }
 }
