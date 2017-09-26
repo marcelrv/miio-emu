@@ -35,7 +35,22 @@ public enum FakeResponses {
     P13("use_time", 21),
     P14("led", 21),
     P15("led_b", 21),
-    // P13("led_b", 21),
+    P16("current", 0.36),
+    P17("temperature", 36.04),
+
+    Y1("color_mode", "2"),
+    Y2("bright", "60"),
+    Y3("ct", "4000"),
+    Y4("rgb", ""),
+    Y5("flowing", "0"),
+    Y6("pdo_status", "0"),
+    Y7("hue", ""),
+    Y8("sat", ""),
+    Y9("kid_mode", "0"),
+    Y10("skey_act", "0"),
+    Y11("skey_scene_id", ""),
+    Y1q("get_ps", "00|045010|00000000"),
+
     UNKNOWN("", JsonNull.INSTANCE);
 
     private final String command;
