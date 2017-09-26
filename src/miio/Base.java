@@ -23,8 +23,8 @@ import org.slf4j.LoggerFactory;
 import miio.emulator.MiIoDevices;
 import miio.emulator.MiIoEmulator;
 
-public class base {
-    private final static org.slf4j.Logger logger = LoggerFactory.getLogger(base.class);
+public class Base {
+    private final static org.slf4j.Logger logger = LoggerFactory.getLogger(Base.class);
     // enter the default device here
     private final static MiIoDevices DEFAULT = MiIoDevices.POWERSTRIP2;
     private final static String DEFAULT_DID = "AABBCCDD";
