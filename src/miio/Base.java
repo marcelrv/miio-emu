@@ -16,9 +16,18 @@
 */
 package miio;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Scanner;
 
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
 
 import miio.emulator.MiIoDevices;
 import miio.emulator.MiIoEmulator;
@@ -26,26 +35,35 @@ import miio.emulator.MiIoEmulator;
 public class Base {
     private final static org.slf4j.Logger logger = LoggerFactory.getLogger(Base.class);
     // enter the default device here
-    private final static MiIoDevices DEFAULT = MiIoDevices.POWERSTRIP2;
-    private final static String DEFAULT_DID = "AABBCCDD";
-    private final static String DEFAULT_TOKEN = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+    public final static MiIoDevices DEFAULT_DEVICE = MiIoDevices.POWERSTRIP2;
+    private final static String DEFAULTSFILE = "miio-default.json";
 
     public static void main(String[] args) {
         logger.info("Mi IO Emulator");
-        MiIoDevices device = DEFAULT;
-        String did = DEFAULT_DID;
-        String token = DEFAULT_TOKEN;
+        MiIoDevices device = DEFAULT_DEVICE;
         Scanner scan = new Scanner(System.in);
+        Defaults data = new Defaults();
+        data.setDid(data.getDid());
+        data.setToken(data.getToken());
         while (true) {
-            MiIoEmulator emu = new MiIoEmulator(device, did, token);
+            Gson gson = new Gson();
+            JsonReader reader;
+            try {
+                reader = new JsonReader(new FileReader(DEFAULTSFILE));
+                data = gson.fromJson(reader, Defaults.class);
+            } catch (FileNotFoundException e1) {
+                logger.info("Defaults file not found {}", DEFAULTSFILE);
+            }
+            device = MiIoDevices.getType(data.getModel());
+            MiIoEmulator emu = new MiIoEmulator(device, data.getDid(), data.getToken());
             logger.info("Mi Io Emulator started as device {} {} (did: {} token: {})", device.getDescription(),
-                    device.getModel(), did, token);
+                    device.getModel(), data.getDid(), data.getToken());
             emu.start();
             listOption();
             String s = scan.next();
             if ("?".equals(s)) {
                 logger.info("Mi Io Emulator started as device {} {} (did: {} token: {})", device.getDescription(),
-                        device.getModel(), did, token);
+                        device.getModel(), data.getDid(), data.getToken());
             }
             if ("q".equals(s)) {
                 break;
@@ -55,15 +73,15 @@ public class Base {
             }
 
             if (s.startsWith("d") && s.substring(2).trim().length() == 8) {
-                did = s.substring(2).trim();
+                data.setDid(s.substring(2).trim());
             } else if (s.startsWith("t") && s.substring(2).trim().length() == 32) {
-                token = s.substring(2).trim();
+                data.setToken(s.substring(2).trim());
             } else if (MiIoDevices.UNKNOWN.equals(MiIoDevices.getType(s))) {
-                device = DEFAULT;
+                device = DEFAULT_DEVICE;
             } else {
                 device = MiIoDevices.getType(s);
             }
-
+            data.setModel(device.getModel());
             try {
                 int d = Integer.valueOf(s);
                 if (d >= 0 && d < MiIoDevices.values().length) {
@@ -74,6 +92,13 @@ public class Base {
             }
             if (emu != null) {
                 emu.stop();
+            }
+
+            try (Writer writer = new FileWriter(DEFAULTSFILE)) {
+                gson = new GsonBuilder().create();
+                gson.toJson(data, writer);
+            } catch (IOException e) {
+                logger.info("Could not write defaults file {}", e.getMessage());
             }
         }
         scan.close();
