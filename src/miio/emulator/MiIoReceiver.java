@@ -113,15 +113,12 @@ public class MiIoReceiver {
                     byte[] response = Arrays.copyOfRange(receivePacket.getData(), receivePacket.getOffset(),
                             receivePacket.getOffset() + receivePacket.getLength());
 
-                    if (DISCOVER_STRING.equals(response)) {
-                        logger.info("Received Discovery package from {}, data {} from {}",
-                                receivePacket.getAddress().toString());
-
+                    if (Arrays.equals(DISCOVER_STRING, response)) {
+                        logger.info("Received Discovery package from {}", receivePacket.getAddress().toString());
                     }
 
                     Message message = new Message(response);
-                    // logger.info("Received {} {}", receivePacket.getAddress().toString(), message.toSting());
-
+                    logger.trace("Received {} {}", receivePacket.getAddress().toString(), message.toSting());
                     for (MiIoMessageListener listener : listeners) {
                         logger.trace("inform listener {}, data {} from {}", listener);
                         try {

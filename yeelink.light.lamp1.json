@@ -1,0 +1,78 @@
+{
+  "model": "yeelink.light.lamp1",
+  "commands": [
+    {
+      "command": "get_ps",
+      "param": [
+        "cfg_pomodoro",
+        "00"
+      ],
+      "fakeresponse": "00|045010|00000000"
+    },
+    {
+      "command": "cron_get",
+      "param": [
+        0
+      ],
+      "fakeresponse": []
+    }
+  ],
+  "properties": [
+    {
+      "property": "power",
+      "fakeresponse": "on"
+    },
+    {
+      "property": "bright",
+      "fakeresponse": 21
+    },
+    {
+      "property": "delayoff",
+      "fakeresponse": ""
+    },
+    {
+      "property": "ct",
+      "fakeresponse": 4000
+    },
+    {
+      "property": "color_mode",
+      "fakeresponse": 2
+    },
+    {
+      "property": "name",
+      "fakeresponse": ""
+    },
+    {
+      "property": "rgb",
+      "fakeresponse": ""
+    },
+    {
+      "property": "flowing",
+      "fakeresponse": "0"
+    },
+    {
+      "property": "pdo_status",
+      "fakeresponse": "0"
+    },
+    {
+      "property": "hue",
+      "fakeresponse": ""
+    },
+    {
+      "property": "sat",
+      "fakeresponse": ""
+    },
+    {
+      "property": "kid_mode",
+      "fakeresponse": "0"
+    },
+    {
+      "property": "skey_act",
+      "fakeresponse": "0"
+    },
+    {
+      "property": "skey_scene_id",
+      "fakeresponse": ""
+    }
+  ]
+}

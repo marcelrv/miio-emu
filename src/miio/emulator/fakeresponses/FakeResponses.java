@@ -14,10 +14,15 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package miio.emulator;
+package miio.emulator.fakeresponses;
 
 import com.google.gson.JsonNull;
 
+/**
+ * The {@link FakeResponses} are default fake responses.
+ *
+ * @author Marcel Verpaalen - Initial contribution
+ */
 public enum FakeResponses {
 
     P1("power", "on"),
@@ -49,7 +54,8 @@ public enum FakeResponses {
     Y9("kid_mode", "0"),
     Y10("skey_act", "0"),
     Y11("skey_scene_id", ""),
-    Y1q("get_ps", "00|045010|00000000"),
+    Y1q("delayoff", ""),
+    P18("name", "fake"),
 
     UNKNOWN("", JsonNull.INSTANCE);
 

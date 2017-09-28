@@ -23,6 +23,8 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.LoggerFactory;
@@ -33,6 +35,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 
+import miio.emulator.fakeresponses.FakeResponseGenerator;
+
 public class MiIoEmulator implements MiIoMessageListener {
     private final static org.slf4j.Logger logger = LoggerFactory.getLogger(MiIoEmulator.class);
     private MiIoReceiver comms;
@@ -40,14 +44,17 @@ public class MiIoEmulator implements MiIoMessageListener {
 
     private byte[] did = Utils.hexStringToByteArray("AABBCCDD");
     private byte[] token = Utils.hexStringToByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    private Map<String, String> cmds = new HashMap<String, String>();
 
     // private final static MiIoDevices EMULATED_DEVICE = AIR_PURIFIER;
     private final MiIoDevices emulatedDevice;
+    private final FakeResponseGenerator responseGen;
 
     public MiIoEmulator(MiIoDevices emulatedDevice, String did, String token) {
         this.emulatedDevice = emulatedDevice;
         this.did = Utils.hexStringToByteArray(did);
         this.token = Utils.hexStringToByteArray(token);
+        responseGen = new FakeResponseGenerator(emulatedDevice.getModel());
     }
 
     public void start() {
@@ -116,6 +123,9 @@ public class MiIoEmulator implements MiIoMessageListener {
             JsonElement params = command.get("params");
             MiIoCommand miCmd = MiIoCommand.getCommand(method);
 
+            if (!cmds.containsKey(method)) {
+                cmds.put(method, params.toString());
+            }
             logger.info("<-Received {} ({}) command from {}", miCmd, command, response);
 
             JsonObject fullCommand = new JsonObject();
@@ -133,16 +143,14 @@ public class MiIoEmulator implements MiIoMessageListener {
                     JsonArray result = new JsonArray();
                     // respond to each property
                     for (JsonElement e : params.getAsJsonArray()) {
-                        Object r = FakeResponses.getCommand(e.getAsString()).getResponse();
-                        result.add(parser.parse(r.toString()));
+// Object r = FakeResponses.getCommand(e.getAsString()).getResponse();
+// result.add(parser.parse(r.toString()));
+                        result.add(responseGen.getPropery(e.getAsString()));
                     }
                     fullCommand.add("result", result);
                     break;
                 default:
-                    logger.info("No Fake response for command {} -> {}", miCmd.toString(), socketAddress.toString());
-                    JsonArray resultok = new JsonArray();
-                    resultok.add("ok");
-                    fullCommand.add("result", resultok);
+                    fullCommand.add("result", responseGen.getResponse(method, params));
                     break;
             }
             logger.info("->Send response {} -> {}", fullCommand.toString(), socketAddress.toString());
@@ -173,6 +181,11 @@ public class MiIoEmulator implements MiIoMessageListener {
     }
 
     public void stop() {
+        responseGen.saveResponses();
         comms.close();
+    }
+
+    public void reload() {
+        responseGen.loadResponses();
     }
 }
