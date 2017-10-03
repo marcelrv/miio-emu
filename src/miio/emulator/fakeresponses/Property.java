@@ -29,6 +29,10 @@ public class Property {
     @Expose
     private JsonElement response;
 
+    @SerializedName("datatype")
+    @Expose
+    private String datatype;
+
     public Property(String property, JsonElement response) {
         this.property = property;
         this.response = response;
@@ -48,5 +52,13 @@ public class Property {
 
     public void setResponse(JsonElement response) {
         this.response = response;
+    }
+
+    public String getDatatype() {
+        return datatype;
+    }
+
+    public void setDatatype(String datatype) {
+        this.datatype = datatype;
     }
 }

@@ -33,15 +33,19 @@ public enum FakeResponses {
     P6("buzzer", "off"),
     P7("f1_hour", 33),
     P8("temp_dec", 21),
-    P9("favorite_level", 21),
+    P9("favorite_level", 10),
     P10("bright", 21),
     P11("filter1_life", 21),
-    P12("f1_hour_used", 21),
+    P12("f1_hour_used", 327),
+
     P13("use_time", 21),
     P14("led", 21),
     P15("led_b", 21),
     P16("current", 0.36),
     P17("temperature", 36.04),
+    P18("use_time", 1179900),
+    P19("motor1_speed", 349),
+    P20("child_lock", "off"),
 
     Y1("color_mode", "2"),
     Y2("bright", "60"),
@@ -54,8 +58,8 @@ public enum FakeResponses {
     Y9("kid_mode", "0"),
     Y10("skey_act", "0"),
     Y11("skey_scene_id", ""),
-    Y1q("delayoff", ""),
-    P18("name", "fake"),
+    Y12("delayoff", ""),
+    Y13("name", "fake"),
 
     UNKNOWN("", JsonNull.INSTANCE);
 

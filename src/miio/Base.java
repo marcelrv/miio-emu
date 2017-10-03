@@ -37,7 +37,7 @@ public class Base {
     public final static MiIoDevices DEFAULT_DEVICE = MiIoDevices.POWERSTRIP2;
     private final static String DEFAULTSFILE = "miio-default.yaml";
 
-    private static boolean enableMdns;
+    private static boolean enableMdns = true;
 
     public static void main(String[] args) {
         logger.info("Mi IO Emulator");
@@ -62,6 +62,7 @@ public class Base {
             if (enableMdns) {
                 mdns.registerService(data.getModel(), data.getDid());
             }
+
             listOption();
             String s = scan.next();
             if ("?".equals(s)) {
@@ -121,7 +122,7 @@ public class Base {
      */
     private static void listDevices() {
         for (MiIoDevices d : MiIoDevices.values()) {
-            logger.debug("Device {} : {}", d.ordinal(), d.getModel());
+            logger.info("Device {} : {}", d.ordinal(), d.getModel());
         }
     }
 

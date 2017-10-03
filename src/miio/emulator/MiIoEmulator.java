@@ -136,7 +136,7 @@ public class MiIoEmulator implements MiIoMessageListener {
                     String res = "{\"life\":88749,\"cfg_time\":0,\"token\":\"" + Utils.getHex(token)
                             + "\",\"mac\":\"34:CE:00:84:D6:AA\",\"fw_ver\":\"1.2.4_59\",\"hw_ver\":\"MC200\",\"model\":\""
                             + emulatedDevice.getModel()
-                            + "\",\"wifi_fw_ver\":\"SD878x-14.76.36.p79-702.1.0-WM\",\"ap\":{\"rssi\":-36,\"ssid\":\"here\",\"bssid\":\"34:81:C4:24:29:BB\"},\"netif\":{\"localIp\":\"192.168.1.73\",\"mask\":\"255.255.255.0\",\"gw\":\"192.168.1.199\"},\"mmfree\":27272,\"ot\":\"otu\",\"otu_stat\":[307,292,247,0,247,419],\"ott_stat\":[0,0,0,0]}";
+                            + "\",\"wifi_fw_ver\":\"SD878x-14.76.36.p79-702.1.0-WM\",\"ap\":{\"rssi\":-36,\"ssid\":\"mygateway1\",\"bssid\":\"34:81:C4:24:29:BB\"},\"netif\":{\"localIp\":\"192.168.3.126\",\"mask\":\"255.255.255.0\",\"gw\":\"192.168.3.1\"},\"mmfree\":27272,\"ot\":\"otu\",\"otu_stat\":[307,292,247,0,247,419],\"ott_stat\":[0,0,0,0]}";
                     fullCommand.add("result", parser.parse(res).getAsJsonObject());
                     break;
                 case GET_PROPERTY:

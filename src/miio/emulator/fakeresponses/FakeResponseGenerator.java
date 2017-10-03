@@ -136,7 +136,13 @@ public class FakeResponseGenerator {
 // }
         if (!found) {
             Object r = FakeResponses.getCommand(property).getResponse();
-            resp = parser.parse(r.toString());
+            if (r instanceof String) {
+                resp = new JsonPrimitive((String) r);
+            } else {
+                resp = parser.parse(r.toString());
+            }
+            // JsonElement element = gson.fromJson(myData.toString(), JsonElement.class);
+
             logger.debug("No model specific response for propert {} using default {}", property, resp.toString());
             logger.debug("Property {} not found... adding", property);
             modelData.getProperties().add(new Property(property, resp));

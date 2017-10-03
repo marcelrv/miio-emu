@@ -24,8 +24,8 @@ public class MDNSServiceRegistration {
             Logger logger = Logger.getLogger(JmDNS.class.getName());
             ConsoleHandler handler = new ConsoleHandler();
             logger.addHandler(handler);
-            logger.setLevel(Level.INFO);
-            handler.setLevel(Level.INFO);
+            logger.setLevel(Level.FINER);
+            handler.setLevel(Level.FINER);
 
             // Register a service
             serviceInfo = ServiceInfo.create("_miio._udp.local", id, PORT, "path=/mydevice");
