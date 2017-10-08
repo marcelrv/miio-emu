@@ -38,7 +38,7 @@ public enum FakeResponses {
     P11("filter1_life", 21),
     P12("f1_hour_used", 327),
 
-    P13("use_time", 21),
+    P13("use_time", 1179900),
     P14("led", 21),
     P15("led_b", 21),
     P16("current", 0.36),
@@ -46,6 +46,8 @@ public enum FakeResponses {
     P18("use_time", 1179900),
     P19("motor1_speed", 349),
     P20("child_lock", "off"),
+    P21("purify_volume", 8723),
+    P22("average_aqi", 18),
 
     Y1("color_mode", "2"),
     Y2("bright", "60"),
