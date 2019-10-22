@@ -6,7 +6,7 @@
 	<version>0.0.2-SNAPSHOT</version>
 	<properties>
 		<slf4jVersion>1.7.25</slf4jVersion>
-		<jacksonVersion>2.9.9</jacksonVersion>
+		<jacksonVersion>2.10.0</jacksonVersion>
 	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
