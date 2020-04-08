@@ -37,7 +37,7 @@ public class Base {
     public final static MiIoDevices DEFAULT_DEVICE = MiIoDevices.POWERSTRIP2;
     private final static String DEFAULTSFILE = "miio-default.yaml";
 
-    private static boolean enableMdns = true;
+    private static boolean enableMdns = false;
 
     public static void main(String[] args) {
         logger.info("Mi IO Emulator");

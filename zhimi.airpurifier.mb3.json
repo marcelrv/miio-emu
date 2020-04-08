@@ -1,0 +1,36 @@
+{
+  "model": "zhimi.airpurifier.mb3",
+  "commands": [
+    {
+      "command": "get_properties",
+      "param": [
+        {
+          "did": "power",
+          "siid": 2,
+          "piid": 2
+        },
+        {
+          "did": "mode",
+          "siid": 2,
+          "piid": 5
+        }
+      ],
+      "fakeresponse": [
+        {
+          "did": "power",
+          "siid": 3,
+          "piid": 6,
+          "code": 0,
+          "value": true
+        }, {
+          "did": "mode",
+          "siid": 3,
+          "piid": 6,
+          "code": 0,
+          "value": "normal"
+        }
+      ]
+    }
+  ],
+  "properties": []
+}
