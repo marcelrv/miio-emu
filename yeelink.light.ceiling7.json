@@ -1,0 +1,36 @@
+{
+  "model": "yeelink.light.ceiling7",
+  "commands": [],
+  "properties": [
+    {
+      "property": "power",
+      "fakeresponse": "on",
+      "datatype": null
+    },
+    {
+      "property": "power_consume_rate",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "wifi_led",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "power_price",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "current",
+      "fakeresponse": 0.36,
+      "datatype": null
+    },
+    {
+      "property": "temperature",
+      "fakeresponse": 36.04,
+      "datatype": null
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+	"model": "zhimi.airpurifier.ma4",
+	"ismiot": false,
+	"commands": [
+		{
+			"command": "get_properties",
+			"param": [
+				{
+					"did": "power",
+					"siid": 2,
+					"piid": 2
+				},
+				{
+					"did": "mode",
+					"siid": 2,
+					"piid": 5
+				}
+			],
+			"fakeresponse": [
+				{
+					"did": "power",
+					"siid": 3,
+					"piid": 6,
+					"code": 0,
+					"value": 22
+				},
+				{
+					"did": "mode",
+					"siid": 3,
+					"piid": 6,
+					"code": 0,
+					"value": "normal"
+				}
+			]
+		}
+	], 
+	"properties":[{"property":"fault","fakeresponse":87,"datatype":"Number"},{"property":"on","fakeresponse":"true","datatype":"Switch"},{"property":"fan-level","fakeresponse":43,"datatype":"Number"},{"property":"mode","fakeresponse":33,"datatype":"Number"},{"property":"firmware-revision","fakeresponse":"normal","datatype":"String"},{"property":"manufacturer","fakeresponse":"normal","datatype":"String"},{"property":"model","fakeresponse":"normal","datatype":"String"},{"property":"serial-number","fakeresponse":"normal","datatype":"String"},{"property":"pm2.5-density","fakeresponse":9,"datatype":"Number"},{"property":"relative-humidity","fakeresponse":86,"datatype":"Number"},{"property":"temperature","fakeresponse":83,"datatype":"Number"},{"property":"filter-life-level","fakeresponse":95,"datatype":"Number"},{"property":"filter-used-time","fakeresponse":"normal","datatype":"String"},{"property":"alarm","fakeresponse":"true","datatype":"Switch"},{"property":"brightness","fakeresponse":56,"datatype":"Number"},{"property":"on1","fakeresponse":"true","datatype":"Switch"},{"property":"physical-controls-locked","fakeresponse":"true","datatype":"Switch"},{"property":"button-pressed","fakeresponse":"normal","datatype":"String"},{"property":"filter-max-time","fakeresponse":37,"datatype":"Number"},{"property":"filter-hour-used-debug","fakeresponse":56,"datatype":"Number"},{"property":"m1-strong","fakeresponse":64,"datatype":"Number"},{"property":"m1-high","fakeresponse":57,"datatype":"Number"},{"property":"m1-med","fakeresponse":44,"datatype":"Number"},{"property":"m1-med-l","fakeresponse":86,"datatype":"Number"},{"property":"m1-low","fakeresponse":54,"datatype":"Number"},{"property":"m1-silent","fakeresponse":17,"datatype":"Number"},{"property":"m1-favorite","fakeresponse":41,"datatype":"Number"},{"property":"motor1-speed","fakeresponse":18,"datatype":"Number"},{"property":"motor1-set-speed","fakeresponse":76,"datatype":"Number"},{"property":"favorite-fan-level","fakeresponse":41,"datatype":"Number"},{"property":"use-time","fakeresponse":31,"datatype":"Number"},{"property":"purify-volume","fakeresponse":91,"datatype":"Number"},{"property":"average-aqi","fakeresponse":14,"datatype":"Number"},{"property":"average-aqi-cnt","fakeresponse":34,"datatype":"Number"},{"property":"aqi-zone","fakeresponse":"normal","datatype":"String"},{"property":"sensor-state","fakeresponse":"normal","datatype":"String"},{"property":"aqi-goodh","fakeresponse":34,"datatype":"Number"},{"property":"aqi-runstate","fakeresponse":91,"datatype":"Number"},{"property":"aqi-state","fakeresponse":76,"datatype":"Number"},{"property":"aqi-updata-heartbeat","fakeresponse":72,"datatype":"Number"},{"property":"rfid-tag","fakeresponse":"normal","datatype":"String"},{"property":"rfid-factory-id","fakeresponse":"normal","datatype":"String"},{"property":"rfid-product-id","fakeresponse":"normal","datatype":"String"},{"property":"rfid-time","fakeresponse":"normal","datatype":"String"},{"property":"rfid-serial-num","fakeresponse":"normal","datatype":"String"},{"property":"app-extra","fakeresponse":63,"datatype":"Number"},{"property":"main-channel","fakeresponse":90,"datatype":"Number"},{"property":"slave-channel","fakeresponse":81,"datatype":"Number"},{"property":"cola","fakeresponse":"normal","datatype":"String"},{"property":"buttom-door","fakeresponse":"true","datatype":"Switch"},{"property":"reboot-cause","fakeresponse":79,"datatype":"Number"},{"property":"hw-version","fakeresponse":57,"datatype":"Number"},{"property":"i2c-error-count","fakeresponse":18,"datatype":"Number"},{"property":"manual-level","fakeresponse":11,"datatype":"Number"}]
+	
+}
+

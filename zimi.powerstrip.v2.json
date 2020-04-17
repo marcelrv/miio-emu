@@ -1,0 +1,282 @@
+{
+  "model": "zimi.powerstrip.v2",
+  "ismiot": false,
+  "commands": [],
+  "properties": [
+    {
+      "property": "fault",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "on",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "fan-level",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "mode",
+      "fakeresponse": "normal",
+      "datatype": null
+    },
+    {
+      "property": "firmware-revision",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "manufacturer",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "model",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "serial-number",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "pm2.5-density",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "relative-humidity",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "temperature",
+      "fakeresponse": 36.04,
+      "datatype": null
+    },
+    {
+      "property": "filter-life-level",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "filter-used-time",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "alarm",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "brightness",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "on1",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "physical-controls-locked",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "button-pressed",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "filter-max-time",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "filter-hour-debug",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "motor-strong",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "motor-high",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "motor-med",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "motor-med-l",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "motor-low",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "motor-silent",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "motor-favorite",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "motor-speed",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "motor-set-speed",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "favorite-fan-level",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "use-time",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "purify-volume",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "average-aqi",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "average-aqi-cnt",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "aqi-zone",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "sensor-state",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "aqi-goodh",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "aqi-runstate",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "aqi-state",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "aqi-updata-heartbeat",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "rfid-tag",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "rfid-factory-id",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "rfid-product-id",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "rfid-time",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "rfid-serial-num",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "app-extra",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "main-channel",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "slave-channel",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "cola",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "buttom-door",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "reboot-cause",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "hw-version",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "iic-error-count",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "manual-level",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "country-code",
+      "fakeresponse": null,
+      "datatype": null
+    }
+  ]
+}

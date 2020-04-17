@@ -139,12 +139,31 @@ public class MiIoEmulator implements MiIoMessageListener {
                             + "\",\"wifi_fw_ver\":\"SD878x-14.76.36.p79-702.1.0-WM\",\"ap\":{\"rssi\":-36,\"ssid\":\"mygateway1\",\"bssid\":\"34:81:C4:24:29:BB\"},\"netif\":{\"localIp\":\"192.168.3.126\",\"mask\":\"255.255.255.0\",\"gw\":\"192.168.3.1\"},\"mmfree\":27272,\"ot\":\"otu\",\"otu_stat\":[307,292,247,0,247,419],\"ott_stat\":[0,0,0,0]}";
                     fullCommand.add("result", parser.parse(res).getAsJsonObject());
                     break;
+                case GET_PROPERTIES:
+                    JsonArray miotresult = new JsonArray();
+                    for (JsonElement e : params.getAsJsonArray()) {
+
+                        JsonObject miot = e.getAsJsonObject();
+
+                        // JsonObject json = new JsonObject();
+                        // json.addProperty("did", miIoBasicChannel.getChannel());
+                        // json.addProperty("siid", miIoBasicChannel.getSiid());
+                        // json.addProperty("piid", miIoBasicChannel.getPiid());
+                        // json.add("value", value);
+
+                        String prop = miot.get("did").getAsString();
+                        miot.add("value", responseGen.getPropery(prop));
+                        miotresult.add(miot);
+                    }
+                    fullCommand.add("result", miotresult);
+                    break;
+
                 case GET_PROPERTY:
                     JsonArray result = new JsonArray();
                     // respond to each property
                     for (JsonElement e : params.getAsJsonArray()) {
-// Object r = FakeResponses.getCommand(e.getAsString()).getResponse();
-// result.add(parser.parse(r.toString()));
+                        // Object r = FakeResponses.getCommand(e.getAsString()).getResponse();
+                        // result.add(parser.parse(r.toString()));
                         result.add(responseGen.getPropery(e.getAsString()));
                     }
                     fullCommand.add("result", result);

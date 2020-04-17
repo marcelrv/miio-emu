@@ -27,6 +27,9 @@ public class ModelLoader {
     @SerializedName("model")
     @Expose
     private String model;
+    @SerializedName("ismiot")
+    @Expose
+    private boolean ismiot = false;
     @SerializedName("commands")
     @Expose
     private List<Command> commands = new ArrayList<Command>();
@@ -56,6 +59,14 @@ public class ModelLoader {
 
     public void setProperties(List<Property> properties) {
         this.properties = properties;
+    }
+
+    public boolean isIsmiot() {
+        return ismiot;
+    }
+
+    public void setIsmiot(boolean ismiot) {
+        this.ismiot = ismiot;
     }
 
 }
