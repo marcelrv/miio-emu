@@ -1,0 +1,122 @@
+{
+  "model": "mrbond.airer.m1super",
+  "ismiot": false,
+  "commands": [],
+  "properties": [
+    {
+      "property": "status",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "fault",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "mode",
+      "fakeresponse": "normal",
+      "datatype": null
+    },
+    {
+      "property": "target-water-level",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "fan-level",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "battery-level",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "charging-state",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "alarm",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "volume",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "filter-life-level",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "filter-left-time",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "brush-life-level",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "brush-left-time",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "brush-life-level1",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "brush-left-time1",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "clean-area",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "clean-time",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "total-clean-area",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "total-clean-time",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "total-clean-count",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "language",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "not-disturb-switch",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "mop-status",
+      "fakeresponse": null,
+      "datatype": null
+    }
+  ]
+}

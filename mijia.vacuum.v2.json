@@ -1,0 +1,142 @@
+{
+  "model": "mijia.vacuum.v2",
+  "ismiot": false,
+  "commands": [],
+  "properties": [
+    {
+      "property": "manufacturer",
+      "fakeresponse": "normal",
+      "datatype": "String"
+    },
+    {
+      "property": "model",
+      "fakeresponse": "normal",
+      "datatype": "String"
+    },
+    {
+      "property": "serial-number",
+      "fakeresponse": "normal",
+      "datatype": "String"
+    },
+    {
+      "property": "firmware-revision",
+      "fakeresponse": "normal",
+      "datatype": "String"
+    },
+    {
+      "property": "status",
+      "fakeresponse": 1,
+      "datatype": "Number"
+    },
+    {
+      "property": "fault",
+      "fakeresponse": 1,
+      "datatype": "Number"
+    },
+    {
+      "property": "mode",
+      "fakeresponse": 1,
+      "datatype": "Number"
+    },
+    {
+      "property": "target-water-level",
+      "fakeresponse": 19,
+      "datatype": "Number"
+    },
+    {
+      "property": "fan-level",
+      "fakeresponse": 69,
+      "datatype": "Number"
+    },
+    {
+      "property": "battery-level",
+      "fakeresponse": 32,
+      "datatype": "Number"
+    },
+    {
+      "property": "charging-state",
+      "fakeresponse": 29,
+      "datatype": "Number"
+    },
+    {
+      "property": "alarm",
+      "fakeresponse": "true",
+      "datatype": "Switch"
+    },
+    {
+      "property": "volume",
+      "fakeresponse": 96,
+      "datatype": "Number"
+    },
+    {
+      "property": "filter-life-level",
+      "fakeresponse": 68,
+      "datatype": "Number"
+    },
+    {
+      "property": "filter-left-time",
+      "fakeresponse": 26,
+      "datatype": "Number"
+    },
+    {
+      "property": "brush-life-level",
+      "fakeresponse": 68,
+      "datatype": "Number"
+    },
+    {
+      "property": "brush-left-time",
+      "fakeresponse": 41,
+      "datatype": "Number"
+    },
+    {
+      "property": "brush-life-level1",
+      "fakeresponse": 8,
+      "datatype": "Number"
+    },
+    {
+      "property": "brush-left-time1",
+      "fakeresponse": 14,
+      "datatype": "Number"
+    },
+    {
+      "property": "clean-area",
+      "fakeresponse": 31,
+      "datatype": "Number"
+    },
+    {
+      "property": "clean-time",
+      "fakeresponse": 64,
+      "datatype": "Number"
+    },
+    {
+      "property": "total-clean-area",
+      "fakeresponse": 38,
+      "datatype": "Number"
+    },
+    {
+      "property": "total-clean-time",
+      "fakeresponse": 39,
+      "datatype": "Number"
+    },
+    {
+      "property": "total-clean-count",
+      "fakeresponse": 88,
+      "datatype": "Number"
+    },
+    {
+      "property": "language",
+      "fakeresponse": 53,
+      "datatype": "Number"
+    },
+    {
+      "property": "not-disturb-switch",
+      "fakeresponse": "true",
+      "datatype": "Switch"
+    },
+    {
+      "property": "mop-status",
+      "fakeresponse": 2,
+      "datatype": "Number"
+    }
+  ]
+}

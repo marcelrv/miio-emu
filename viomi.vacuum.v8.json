@@ -1,0 +1,177 @@
+{
+  "model": "viomi.vacuum.v8",
+  "ismiot": false,
+  "commands": [],
+  "properties": [
+    {
+      "property": "battery-level",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "charging-state",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "firmware-revision",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "manufacturer",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "model",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "serial-number",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "fault",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "status",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "brush-left-time",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "brush-life-level",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "filter-life-level",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "filter-left-time",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "brush-left-time1",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "brush-life-level1",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "work-mode",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "area",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "timer",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "mode",
+      "fakeresponse": "normal",
+      "datatype": null
+    },
+    {
+      "property": "total-clean-time",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "total-clean-times",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "total-clean-area",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "clean-log-start-time",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "button-led",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "task-done",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "life-sieve",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "life-brush-side",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "life-brush-main",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "enable",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "start-time",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "stop-time",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "map-view",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "volume",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "voice-packets",
+      "fakeresponse": null,
+      "datatype": null
+    },
+    {
+      "property": "time-zone",
+      "fakeresponse": null,
+      "datatype": null
+    }
+  ]
+}
