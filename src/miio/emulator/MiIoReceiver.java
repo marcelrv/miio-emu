@@ -30,8 +30,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.collect.ImmutableSet;
-
 /**
  * The {@link MiIoReceiver} is responsible for communications with the Mi IO devices
  *
@@ -41,7 +39,7 @@ public class MiIoReceiver {
     public static final byte[] DISCOVER_STRING = Utils
             .hexStringToByteArray("21310020ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
     public static final int PORT = 54321;
-    public static final Set<String> IGNORED_TOLKENS = ImmutableSet.of("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+    public static final Set<String> IGNORED_TOLKENS = Set.of("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
             "00000000000000000000000000000000");
 
     private static final int MSG_BUFFER_SIZE = 2048;

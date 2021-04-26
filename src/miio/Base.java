@@ -16,16 +16,16 @@
 */
 package miio;
 
-import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SequenceWriter;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import miio.discovery.MDNSServiceRegistration;
 import miio.emulator.MiIoDevices;
@@ -34,27 +34,34 @@ import miio.emulator.MiIoEmulator;
 public class Base {
     private final static org.slf4j.Logger logger = LoggerFactory.getLogger(Base.class);
     // enter the default device here
-    public final static MiIoDevices DEFAULT_DEVICE = MiIoDevices.POWERSTRIP2;
-    private final static String DEFAULTSFILE = "miio-default.yaml";
+    public final static MiIoDevices DEFAULT_DEVICE = MiIoDevices.DREAME_VACUUM_P2009;
+    // private final static String DEFAULTSFILE = "miio-default.yaml";
+    private final static String DEFAULTSFILE = "miio-default.json";
+
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     private static boolean enableMdns = false;
 
     public static void main(String[] args) {
         logger.info("Mi IO Emulator");
         MiIoDevices device = DEFAULT_DEVICE;
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         Scanner scan = new Scanner(System.in);
-        Defaults data = new Defaults();
-        data.setDid(data.getDid());
-        data.setToken(data.getToken());
+        Defaults data = null;
         MDNSServiceRegistration mdns = new MDNSServiceRegistration();
         while (true) {
             try {
-                data = mapper.readValue(new File(DEFAULTSFILE), Defaults.class);
+                data = GSON.fromJson(new FileReader(DEFAULTSFILE), Defaults.class);
             } catch (IOException e) {
                 logger.info("Could not read {}: {}", DEFAULTSFILE, e.getMessage());
             }
-            device = MiIoDevices.getType(data.getModel());
+            if (data == null) {
+                logger.info("Could not read defaults from file {}. Using initial values.", DEFAULTSFILE);
+                data = new Defaults();
+            }
+            data.setDid(data.getDid());
+            data.setToken(data.getToken());
+            data.setModel(data.getModel());
+
             MiIoEmulator emu = new MiIoEmulator(device, data.getDid(), data.getToken());
             logger.info("Mi Io Emulator started as device {} {} (did: {} token: {})", device.getDescription(),
                     device.getModel(), data.getDid(), data.getToken());
@@ -104,10 +111,11 @@ public class Base {
             if (enableMdns) {
                 mdns.unRegisterService();
             }
-            ObjectWriter writerJ = mapper.writer();
-            try (SequenceWriter sw = writerJ.writeValues(new File(DEFAULTSFILE))) {
-                sw.write(data);
-            } catch (IOException e) {
+
+            try (PrintWriter writer = new PrintWriter(DEFAULTSFILE)) {
+                GSON.toJson(data, writer);
+                logger.info("Defaults file written:{}", DEFAULTSFILE);
+            } catch (FileNotFoundException e) {
                 logger.info("Could not write defaults file {}", e.getMessage());
             }
         }

@@ -1,5 +1,5 @@
 {
-  "model": "zimi.powerstrip.v2",
-  "token": "B9885D3CA52E0A8591FD30B18795BC26",
-  "did": "02F92BA0"
+  "model": "philips.light.bulb",
+  "token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "did": "AABBCCDD"
 }
