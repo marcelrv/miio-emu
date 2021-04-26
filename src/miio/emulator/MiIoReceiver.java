@@ -35,6 +35,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Marcel Verpaalen - Initial contribution
  */
+
 public class MiIoReceiver {
     public static final byte[] DISCOVER_STRING = Utils
             .hexStringToByteArray("21310020ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
