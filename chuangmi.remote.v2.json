@@ -1,0 +1,31 @@
+{
+  "model": "chuangmi.remote.v2",
+  "ismiot": false,
+  "commands": [
+    {
+      "command": "get_indicatorLamp",
+      "param": [],
+      "fakeresponse": [
+        "off"
+      ]
+    },
+    {
+      "command": "set_indicatorLamp",
+      "param": [
+        "on"
+      ],
+      "fakeresponse": null
+    },
+    {
+      "command": "miIO.ir_play",
+      "param": [
+        {
+          "freq": 38400,
+          "code": "mU3mMwlk4mcwlk0nMwlkzCAA"
+        }
+      ],
+      "fakeresponse": null
+    }
+  ],
+  "properties": []
+}

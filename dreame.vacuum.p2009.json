@@ -1,6 +1,12 @@
 {
   "model": "dreame.vacuum.p2009",
   "ismiot": false,
-  "commands": [],
+  "commands": [
+    {
+      "command": "get_indicatorLamp",
+      "param": [],
+      "fakeresponse": null
+    }
+  ],
   "properties": []
 }

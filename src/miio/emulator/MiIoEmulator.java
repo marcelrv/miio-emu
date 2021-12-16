@@ -199,6 +199,10 @@ public class MiIoEmulator implements MiIoMessageListener {
 
     }
 
+    public void saveResponses() {
+        responseGen.saveResponses();
+    }
+
     public void stop() {
         responseGen.saveResponses();
         comms.close();

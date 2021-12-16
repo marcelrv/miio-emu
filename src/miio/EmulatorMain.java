@@ -61,7 +61,7 @@ public class EmulatorMain {
             data.setDid(data.getDid());
             data.setToken(data.getToken());
             data.setModel(data.getModel());
-
+            device = MiIoDevices.getType(data.getModel());
             MiIoEmulator emu = new MiIoEmulator(device, data.getDid(), data.getToken());
             logger.info("Mi Io Emulator started as device {} {} (did: {} token: {})", device.getDescription(),
                     device.getModel(), data.getDid(), data.getToken());
@@ -86,24 +86,30 @@ public class EmulatorMain {
             if ("r".equals(s)) {
                 emu.reload();
             }
+            if ("s".equals(s)) {
+                emu.saveResponses();
+            }
             if (s.startsWith("d") && s.substring(2).trim().length() == 8) {
                 data.setDid(s.substring(2).trim());
             } else if (s.startsWith("t") && s.substring(2).trim().length() == 32) {
                 data.setToken(s.substring(2).trim());
             } else if (MiIoDevices.UNKNOWN.equals(MiIoDevices.getType(s))) {
-                device = DEFAULT_DEVICE;
+                // device = DEFAULT_DEVICE;
+                logger.info("Unknown device");
             } else {
                 device = MiIoDevices.getType(s);
+                data.setModel(device.getModel());
             }
             try {
                 int d = Integer.valueOf(s);
                 if (d >= 0 && d < MiIoDevices.values().length) {
                     device = MiIoDevices.values()[d];
+                    data.setModel(device.getModel());
                 }
             } catch (NumberFormatException e) {
                 // ignore
             }
-            data.setModel(device.getModel());
+            // data.setModel(device.getModel());
 
             if (emu != null) {
                 emu.stop();
@@ -140,6 +146,7 @@ public class EmulatorMain {
         logger.info("set did:       d:<did>");
         logger.info("set token:     t:<token>");
         logger.info("List Devices:  l");
+        logger.info("Save Responses:s");
         logger.info("Reload response:r");
         logger.info("Quit:          q");
         logger.info("Enter option or Device:");
