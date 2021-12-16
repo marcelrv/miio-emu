@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 import org.slf4j.LoggerFactory;
 
-import miio.Base;
+import miio.EmulatorMain;
 import miio.emulator.MiIoDevices;
 
 public class MDNSTest {
-    private final static org.slf4j.Logger logger = LoggerFactory.getLogger(Base.class);
+    private final static org.slf4j.Logger logger = LoggerFactory.getLogger(EmulatorMain.class);
     // enter the default device here
     public final static MiIoDevices DEFAULT_DEVICE = MiIoDevices.DREAME_VACUUM_P2009;
     public final static String DID = "AABBCCFF";

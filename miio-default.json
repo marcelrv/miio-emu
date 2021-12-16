@@ -1,5 +1,5 @@
 {
-  "model": "philips.light.bulb",
+  "model": "chuangmi.remote.v2",
   "token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
   "did": "AABBCCDD"
 }

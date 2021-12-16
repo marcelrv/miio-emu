@@ -5,7 +5,7 @@
 	<artifactId>xiaomi-test</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
 	<properties>
-		<slf4jVersion>1.7.30</slf4jVersion>
+		<slf4jVersion>1.7.25</slf4jVersion>
 	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>

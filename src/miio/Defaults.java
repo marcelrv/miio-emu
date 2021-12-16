@@ -7,7 +7,7 @@ public class Defaults {
     private String did;
 
     public String getModel() {
-        return model != null ? model : Base.DEFAULT_DEVICE.getModel();
+        return model != null ? model : EmulatorMain.DEFAULT_DEVICE.getModel();
     }
 
     public void setModel(String model) {
