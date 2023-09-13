@@ -28,4 +28,7 @@ public final class MiIoBindingConstants {
     public static final String THING_TYPE_BASIC = "basic";
     public static final String THING_TYPE_VACUUM = "vacuum";
     public static final String THING_TYPE_UNSUPPORTED = "unsupported";
+    public static final String THING_TYPE_LUMI = "lumi";
+    public static final String THING_TYPE_GATEWAY = "gateway";
+
 }

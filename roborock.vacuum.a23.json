@@ -1,0 +1,115 @@
+{
+  "model": "roborock.vacuum.a23",
+  "ismiot": false,
+  "commands": [
+    {
+      "command": "get_dnd_timer",
+      "param": [],
+      "fakeresponse": [
+        {
+          "enabled": 1,
+          "end_hour": 8,
+          "end_minute": 0,
+          "start_hour": 22,
+          "start_minute": 0
+        }
+      ]
+    },
+    {
+      "command": "get_clean_summary",
+      "param": [],
+      "fakeresponse": {
+        "clean_time": 38629,
+        "clean_area": 650425000,
+        "clean_count": 68,
+        "dust_collection_count": 0,
+        "records": [
+          1626292843,
+          1626260657,
+          1626255012,
+          1626206412,
+          1626174164,
+          1626168621,
+          1626036597,
+          1626036415,
+          1626035701,
+          1626035555,
+          1626033643,
+          1626028227,
+          1626021936,
+          1626021732,
+          1626021575,
+          1626020891,
+          1626020332,
+          1626019286,
+          1626019207,
+          1626019147
+        ]
+      }
+    },
+    {
+      "command": "get_status",
+      "param": [],
+      "fakeresponse": [
+        {
+          "msg_ver": 2,
+          "msg_seq": 52,
+          "state": 8,
+          "battery": 100,
+          "clean_time": 15,
+          "clean_area": 140000,
+          "error_code": 0,
+          "map_present": 1,
+          "in_cleaning": 0,
+          "in_returning": 0,
+          "in_fresh_state": 1,
+          "lab_status": 1,
+          "water_box_status": 1,
+          "fan_power": 102,
+          "dnd_enabled": 0,
+          "map_status": 3,
+          "is_locating": 0,
+          "lock_status": 0,
+          "water_box_mode": 204,
+          "water_box_carriage_status": 0,
+          "mop_forbidden_enable": 0
+        }
+      ]
+    },
+    {
+      "command": "get_consumable",
+      "param": [],
+      "fakeresponse": [
+        {
+          "main_brush_work_time": 32030,
+          "side_brush_work_time": 32030,
+          "filter_work_time": 32030,
+          "filter_element_work_time": 7037,
+          "sensor_dirty_time": 34922
+        }
+      ]
+    },
+    {
+      "command": "get_map_v1",
+      "param": [],
+      "fakeresponse": null
+    },
+    {
+      "command": "get_clean_record",
+      "param": [
+        1626292843
+      ],
+      "fakeresponse": [
+        [
+          1497163727,
+          1497165195,
+          1468,
+          22902500,
+          0,
+          1
+        ]
+      ]
+    }
+  ],
+  "properties": []
+}

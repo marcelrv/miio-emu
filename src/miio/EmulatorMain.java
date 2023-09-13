@@ -136,7 +136,7 @@ public class EmulatorMain {
      */
     private static void listDevices() {
         for (MiIoDevices d : MiIoDevices.values()) {
-            logger.info("Device {} : {}", d.ordinal(), d.getModel());
+            logger.info("Device {} : {} - {}", d.ordinal(), d.getModel(), d.getDescription());
         }
     }
 
