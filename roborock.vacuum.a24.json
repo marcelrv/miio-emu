@@ -99,15 +99,16 @@
       "param": [
         1626292843
       ],
-      "fakeresponse": {
-        "start": "2023-09-15T16:55:19+01:00[Europe/Lisbon]",
-        "end": "2023-09-15T17:23:42+01:00[Europe/Lisbon]",
-        "duration": 28,
-        "area": 21.6925,
-        "error": 0,
-        "finished": 1,
-        "finish_reason": 52
-      }
+      "fakeresponse": [
+        [
+          1497163727,
+          1497165195,
+          1468,
+          22902500,
+          0,
+          1
+        ]
+      ]
     },
     {
       "command": "get_room_mapping",
@@ -130,41 +131,6 @@
           "516001007154"
         ]
       ]
-    },
-    {
-      "command": "get_map_status",
-      "param": [],
-      "fakeresponse": [1]
-    },
-    {
-      "command": "get_led_status",
-      "param": [],
-      "fakeresponse": [1]
-    },
-    {
-      "command": "get_segment_status",
-      "param": [],
-      "fakeresponse": [1]
-    },
-    {
-      "command": "get_multi_maps_list",
-      "param": [],
-      "fakeresponse": [{"map_info":[{"add_time":1613030910,"bak_maps":[],"length":11,"mapFlag":0,"name":"Erdgeschoss"},{"add_time":1611430630,"bak_maps":[],"length":8,"mapFlag":1,"name":"1. Etage"},{"add_time":1611430708,"bak_maps":[],"length":6,"mapFlag":2,"name":"Keller"},{"add_time":1611430817,"bak_maps":[],"length":8,"mapFlag":3,"name":"2. Etage"}],"max_bak_map":0,"max_multi_map":4,"multi_map_count":4}]
-    },
-    {
-      "command": "get_fw_features",
-      "param": [],
-      "fakeresponse": [111,112,113,114,115,116,117,118,119,120,121,122,123,124,125]
-    },
-    {
-      "command": "get_carpet_mode",
-      "param": [],
-      "fakeresponse": [{"current_high":500,"current_integral":450,"current_low":400,"enable":1,"stall_time":10}]
-    },
-    {
-      "command": "get_customize_clean_mode",
-      "param": [],
-      "fakeresponse": null
     }
   ],
   "properties": []
