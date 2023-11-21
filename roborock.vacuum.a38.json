@@ -1,0 +1,242 @@
+{
+	"model": "roborock.vacuum.a23",
+	"ismiot": false,
+	"commands": [
+		{
+			"command": "get_dnd_timer",
+			"param": [],
+			"fakeresponse": [
+				{
+					"enabled": 1,
+					"end_hour": 8,
+					"end_minute": 0,
+					"start_hour": 22,
+					"start_minute": 0
+				}
+			]
+		},
+		{
+			"command": "get_clean_summary",
+			"param": [],
+			"fakeresponse": {
+				"clean_time": 109968,
+				"clean_area": 1694875000,
+				"clean_count": 51,
+				"dust_collection_count": 48,
+				"records": [
+					1699081963,
+					1698999875,
+					1698126572,
+					1697463736,
+					1697031817,
+					1696486642,
+					1696320557,
+					1696253060,
+					1695833343,
+					1695821201,
+					1695619374,
+					1695476013,
+					1695457865,
+					1695274110,
+					1695014622,
+					1694876238,
+					1694860994,
+					1694755927,
+					1694526730,
+					1694237806
+				]
+			}
+		},
+		{
+			"command": "get_status",
+			"param": [],
+			"fakeresponse": [
+				{
+					"msg_ver": 2,
+					"msg_seq": 7924,
+					"state": 8,
+					"battery": 100,
+					"clean_time": 2957,
+					"clean_area": 45990000,
+					"error_code": 0,
+					"map_present": 1,
+					"in_cleaning": 0,
+					"in_returning": 0,
+					"in_fresh_state": 1,
+					"lab_status": 3,
+					"water_box_status": 1,
+					"fan_power": 104,
+					"dnd_enabled": 0,
+					"map_status": 3,
+					"is_locating": 0,
+					"lock_status": 0,
+					"water_box_mode": 203,
+					"distance_off": 60,
+					"water_box_carriage_status": 0,
+					"mop_forbidden_enable": 0,
+					"adbumper_status": [
+						0,
+						0,
+						0
+					],
+					"dock_type": 5,
+					"dust_collection_status": 0,
+					"auto_dust_collection": 1,
+					"debug_mode": 0,
+					"switch_map_mode": 0,
+					"dock_error_status": 0,
+					"charge_status": 1
+				}
+			]
+		},
+		{
+			"command": "get_consumable",
+			"param": [],
+			"fakeresponse": [
+				{
+					"main_brush_work_time": 32030,
+					"side_brush_work_time": 32030,
+					"filter_work_time": 32030,
+					"filter_element_work_time": 7037,
+					"sensor_dirty_time": 34922
+				}
+			]
+		},
+		{
+			"command": "get_map_v1",
+			"param": [],
+			"fakeresponse": null
+		},
+		{
+			"command": "get_clean_record",
+			"param": [
+				1626292843
+			],
+			"fakeresponse": [
+				{
+					"begin": 1699081963,
+					"end": 1699084920,
+					"duration": 2957,
+					"area": 45990000,
+					"error": 0,
+					"complete": 1,
+					"start_type": 1,
+					"clean_type": 1,
+					"finish_reason": 52,
+					"dust_collection_status": 1,
+					"map_flag": 0
+				}
+			]
+		},
+		{
+			"command": "get_room_mapping",
+			"param": [],
+			"fakeresponse": [
+				[
+					16,
+					"644001005288"
+				],
+				[
+					17,
+					"644001009315"
+				],
+				[
+					18,
+					"516001007151"
+				],
+				[
+					19,
+					"516001007154"
+				]
+			]
+		},
+		{
+			"command": "get_map_status",
+			"param": [],
+			"fakeresponse": [
+				1
+			]
+		},
+		{
+			"command": "get_led_status",
+			"param": [],
+			"fakeresponse": [
+				1
+			]
+		},
+		{
+			"command": "get_segment_status",
+			"param": [],
+			"fakeresponse": [
+				1
+			]
+		},
+		{
+			"command": "get_multi_maps_list",
+			"param": [],
+			"fakeresponse": [
+				{
+					"max_multi_map": 4,
+					"max_bak_map": 0,
+					"multi_map_count": 2,
+					"map_info": [
+						{
+							"mapFlag": 0,
+							"add_time": 1699084990,
+							"length": 12,
+							"name": "Erdgeschoss ",
+							"bak_maps": []
+						},
+						{
+							"mapFlag": 1,
+							"add_time": 1690381278,
+							"length": 12,
+							"name": "Obergeschoss",
+							"bak_maps": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"command": "get_fw_features",
+			"param": [],
+			"fakeresponse": [
+				111,
+				112,
+				113,
+				114,
+				115,
+				116,
+				117,
+				118,
+				119,
+				120,
+				121,
+				122,
+				123,
+				124,
+				125
+			]
+		},
+		{
+			"command": "get_carpet_mode",
+			"param": [],
+			"fakeresponse": [
+				{
+					"current_high": 500,
+					"current_integral": 450,
+					"current_low": 400,
+					"enable": 1,
+					"stall_time": 10
+				}
+			]
+		},
+		{
+			"command": "get_customize_clean_mode",
+			"param": [],
+			"fakeresponse": null
+		}
+	],
+	"properties": []
+}
