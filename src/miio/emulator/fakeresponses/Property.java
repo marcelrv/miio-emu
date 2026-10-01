@@ -33,9 +33,41 @@ public class Property {
     @Expose
     private String datatype;
 
+    // MIoT service / property id. When present the property is also found by siid/piid
+    // (the binding sends the channel name in 'did' for writes and the property name for reads)
+    @SerializedName("siid")
+    @Expose
+    private Integer siid;
+    @SerializedName("piid")
+    @Expose
+    private Integer piid;
+
     public Property(String property, JsonElement response) {
         this.property = property;
         this.response = response;
+    }
+
+    public Property(String property, JsonElement response, Integer siid, Integer piid) {
+        this(property, response);
+        this.siid = siid;
+        this.piid = piid;
+    }
+
+    public boolean matches(Integer siid, Integer piid) {
+        return siid != null && piid != null && siid.equals(this.siid) && piid.equals(this.piid);
+    }
+
+    public void setSiidPiid(Integer siid, Integer piid) {
+        this.siid = siid;
+        this.piid = piid;
+    }
+
+    public Integer getSiid() {
+        return siid;
+    }
+
+    public Integer getPiid() {
+        return piid;
     }
 
     public String getProperty() {

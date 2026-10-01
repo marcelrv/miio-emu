@@ -19,6 +19,7 @@ package miio.emulator;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.SocketException;
 import java.util.Arrays;
@@ -39,7 +40,9 @@ import org.slf4j.LoggerFactory;
 public class MiIoReceiver {
     public static final byte[] DISCOVER_STRING = Utils
             .hexStringToByteArray("21310020ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-    public static final int PORT = 54321;
+    public static final int DEFAULT_PORT = 54321;
+    /** UDP port to listen on. The openHAB binding always connects to 54321, so only change it for other clients. */
+    public static final int PORT = Integer.getInteger("miio.port", DEFAULT_PORT);
     public static final Set<String> IGNORED_TOLKENS = Set.of("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
             "00000000000000000000000000000000");
 
@@ -53,7 +56,16 @@ public class MiIoReceiver {
     private List<MiIoMessageListener> listeners = new CopyOnWriteArrayList<>();
     private MessageSenderThread senderThread;
 
-    public MiIoReceiver() {
+    public MiIoReceiver() throws SocketException {
+        // bind right away, so a port that can't be used fails with a clear message instead of in the receiver thread
+        try {
+            getSocket();
+        } catch (SocketException e) {
+            throw new SocketException("Could not open UDP port " + PORT + ": " + e.getMessage()
+                    + (PORT == DEFAULT_PORT ? ". Is another process (or emulator) using it? On Windows the port can also"
+                            + " be inside a reserved range, check 'netsh int ipv4 show excludedportrange protocol=udp'"
+                            : ""));
+        }
         senderThread = new MessageSenderThread();
         senderThread.start();
     }
@@ -115,11 +127,16 @@ public class MiIoReceiver {
                     if (Arrays.equals(DISCOVER_STRING, response)) {
                         logger.info("Received Discovery package from {}", receivePacket.getAddress().toString());
                     }
+                    if (response.length < 32) {
+                        logger.debug("Ignoring too short package ({} bytes) from {}", response.length,
+                                receivePacket.getAddress());
+                        continue;
+                    }
 
                     Message message = new Message(response);
                     logger.trace("Received {} {}", receivePacket.getAddress().toString(), message.toSting());
                     for (MiIoMessageListener listener : listeners) {
-                        logger.trace("inform listener {}, data {} from {}", listener);
+                        logger.trace("inform listener {}", listener);
                         try {
                             listener.onMessageReceived(message, receivePacket.getAddress().toString(),
                                     receivePacket.getSocketAddress());
@@ -130,7 +147,11 @@ public class MiIoReceiver {
                 } catch (NoSuchElementException e) {
                     // ignore
                 } catch (SocketException e) {
-                    logger.warn("Socked: {}?", e.getMessage());
+                    if (isInterrupted() || socket == null || socket.isClosed()) {
+                        // closed on shutdown
+                        break;
+                    }
+                    logger.warn("Socket: {}?", e.getMessage());
                 } catch (Exception e) {
                     logger.warn("Error while polling/sending message", e);
                 }
@@ -150,9 +171,12 @@ public class MiIoReceiver {
 
     private DatagramSocket getSocket() throws SocketException {
         if (socket == null || socket.isClosed()) {
-            socket = new DatagramSocket(PORT);
-            socket.setBroadcast(true);
-            socket.setReuseAddress(true);
+            // reuse must be set before binding
+            DatagramSocket newSocket = new DatagramSocket(null);
+            newSocket.setReuseAddress(true);
+            newSocket.setBroadcast(true);
+            newSocket.bind(new InetSocketAddress(PORT));
+            socket = newSocket;
             return socket;
         }
         return socket;

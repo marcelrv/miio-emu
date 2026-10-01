@@ -37,6 +37,17 @@ public class ModelLoader {
     @Expose
     private List<Property> properties = new ArrayList<Property>();
 
+    @SerializedName("actions")
+    @Expose
+    private List<Action> actions = new ArrayList<Action>();
+
+    public List<Action> getActions() {
+        if (actions == null) {
+            actions = new ArrayList<Action>();
+        }
+        return actions;
+    }
+
     public String getModel() {
         return model;
     }

@@ -69,7 +69,12 @@ public class FakeResponseGenerator {
         try (JsonReader reader = new JsonReader(new FileReader(fn))) {
             modelData = gson.fromJson(reader, ModelLoader.class);
         } catch (FileNotFoundException e1) {
-            logger.info("Mode file not found {}", fn);
+            logger.info("Model file not found {}", fn);
+            modelData = DatabaseImporter.importModel(model);
+            if (modelData != null) {
+                // write the generated defaults, so they can be adjusted
+                saveResponses();
+            }
         } catch (IOException e) {
             logger.info("Could not read file {}. {}", fn, e.getMessage());
         }
@@ -109,6 +114,83 @@ public class FakeResponseGenerator {
             modelData.getCommands().add(new Command(command, param));
         }
         return resp;
+    }
+
+    /**
+     * Get a MIoT property value. Looks the property up by siid/piid and falls back to the name (did).
+     */
+    public JsonElement getProperty(String did, Integer siid, Integer piid) {
+        Property prop = findProperty(did, siid, piid);
+        if (prop == null) {
+            logger.debug("MIoT property {} ({}.{}) not in model, adding with default", did, siid, piid);
+            JsonElement defaultValue = getPropery(did);
+            prop = findProperty(did, siid, piid);
+            if (prop != null) {
+                prop.setSiidPiid(siid, piid);
+            }
+            return defaultValue.isJsonNull() ? new JsonPrimitive("") : defaultValue;
+        }
+        JsonElement resp = prop.getResponse();
+        return resp == null || resp.isJsonNull() ? new JsonPrimitive("") : resp;
+    }
+
+    /**
+     * Sets a MIoT property value
+     *
+     * @return true if the property is known (or added) and the value is set
+     */
+    public boolean setProperty(String did, Integer siid, Integer piid, JsonElement value) {
+        Property prop = findProperty(did, siid, piid);
+        if (prop == null) {
+            prop = new Property(did, value, siid, piid);
+            modelData.getProperties().add(prop);
+            logger.debug("MIoT property {} ({}.{}) not in model, added with value {}", did, siid, piid, value);
+        } else {
+            prop.setResponse(value);
+        }
+        return true;
+    }
+
+    /**
+     * Performs a MIoT action
+     *
+     * @return the 'out' values of the action
+     */
+    public JsonArray performAction(int siid, int aiid) {
+        for (Action action : modelData.getActions()) {
+            if (action.matches(siid, aiid)) {
+                for (Action.PropertyChange change : action.getSets()) {
+                    Property prop = findProperty(null, change.getSiid(), change.getPiid());
+                    if (prop != null) {
+                        logger.debug("Action {}.{} sets {} to {}", siid, aiid, prop.getProperty(), change.getValue());
+                        prop.setResponse(change.getValue());
+                    } else {
+                        logger.info("Action {}.{} could not set unknown property {}.{}", siid, aiid, change.getSiid(),
+                                change.getPiid());
+                    }
+                }
+                return action.getOut();
+            }
+        }
+        logger.info("Action {}.{} not found in model... adding (without effects)", siid, aiid);
+        modelData.getActions().add(new Action(siid, aiid));
+        return new JsonArray();
+    }
+
+    private Property findProperty(String did, Integer siid, Integer piid) {
+        for (Property prop : modelData.getProperties()) {
+            if (prop.matches(siid, piid)) {
+                return prop;
+            }
+        }
+        if (did != null) {
+            for (Property prop : modelData.getProperties()) {
+                if (did.equals(prop.getProperty())) {
+                    return prop;
+                }
+            }
+        }
+        return null;
     }
 
     public JsonElement getPropery(String property) {
