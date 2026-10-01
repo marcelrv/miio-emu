@@ -47,21 +47,26 @@ public class MiIoEmulator implements MiIoMessageListener {
     private Map<String, String> cmds = new HashMap<String, String>();
 
     // private final static MiIoDevices EMULATED_DEVICE = AIR_PURIFIER;
-    private final MiIoDevices emulatedDevice;
+    private final String model;
+    private final String description;
     private final FakeResponseGenerator responseGen;
 
     public MiIoEmulator(MiIoDevices emulatedDevice, String did, String token) {
-        this.emulatedDevice = emulatedDevice;
-        this.did = Utils.hexStringToByteArray(did);
-        this.token = Utils.hexStringToByteArray(token);
-        responseGen = new FakeResponseGenerator(emulatedDevice.getModel());
+        this(emulatedDevice.getModel(), emulatedDevice.getDescription(), did, token);
     }
 
-    public void start() {
+    public MiIoEmulator(String model, String description, String did, String token) {
+        this.model = model;
+        this.description = description;
+        this.did = Utils.hexStringToByteArray(did);
+        this.token = Utils.hexStringToByteArray(token);
+        responseGen = new FakeResponseGenerator(model);
+    }
+
+    public void start() throws IOException {
         comms = new MiIoReceiver();
         comms.registerListener(this);
-        logger.info("Mi Io Emulator started as device {} ({})", emulatedDevice.getDescription(),
-                emulatedDevice.getModel());
+        logger.info("Mi Io Emulator started as device {} ({})", description, model);
     }
 
     @Override
@@ -106,8 +111,8 @@ public class MiIoEmulator implements MiIoMessageListener {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (JsonSyntaxException e) {
-                logger.warn("Could not parse '{}' <- {} (Device: {}) gave error {}", decryptedResponse, socketAddress,
-                        e);
+                logger.warn("Could not parse '{}' <- {} gave error {}", decryptedResponse, socketAddress,
+                        e.getMessage());
             }
             // return decryptedResponse;
         }
@@ -123,10 +128,10 @@ public class MiIoEmulator implements MiIoMessageListener {
             JsonElement params = command.get("params");
             MiIoCommand miCmd = MiIoCommand.getCommand(method);
 
-            if (!cmds.containsKey(method)) {
+            if (!cmds.containsKey(method) && params != null) {
                 cmds.put(method, params.toString());
             }
-            logger.info("<-Received {} ({}) command from {}", miCmd, command, response);
+            logger.info("<-Received {} command {} from {}", miCmd, command, socketAddress);
 
             JsonObject fullCommand = new JsonObject();
             fullCommand.addProperty("id", msgId);
@@ -135,27 +140,51 @@ public class MiIoEmulator implements MiIoMessageListener {
                 case MIIO_INFO:
                     String res = "{\"life\":88749,\"cfg_time\":0,\"token\":\"" + Utils.getHex(token)
                             + "\",\"mac\":\"34:CE:00:84:D6:AA\",\"fw_ver\":\"1.2.4_59\",\"hw_ver\":\"MC200\",\"model\":\""
-                            + emulatedDevice.getModel()
+                            + model
                             + "\",\"wifi_fw_ver\":\"SD878x-14.76.36.p79-702.1.0-WM\",\"ap\":{\"rssi\":-36,\"ssid\":\"mygateway1\",\"bssid\":\"34:81:C4:24:29:BB\"},\"netif\":{\"localIp\":\"192.168.3.126\",\"mask\":\"255.255.255.0\",\"gw\":\"192.168.3.1\"},\"mmfree\":27272,\"ot\":\"otu\",\"otu_stat\":[307,292,247,0,247,419],\"ott_stat\":[0,0,0,0]}";
                     fullCommand.add("result", parser.parse(res).getAsJsonObject());
                     break;
                 case GET_PROPERTIES:
                     JsonArray miotresult = new JsonArray();
                     for (JsonElement e : params.getAsJsonArray()) {
-
                         JsonObject miot = e.getAsJsonObject();
-
-                        // JsonObject json = new JsonObject();
-                        // json.addProperty("did", miIoBasicChannel.getChannel());
-                        // json.addProperty("siid", miIoBasicChannel.getSiid());
-                        // json.addProperty("piid", miIoBasicChannel.getPiid());
-                        // json.add("value", value);
-
-                        String prop = miot.get("did").getAsString();
-                        miot.add("value", responseGen.getPropery(prop));
-                        miotresult.add(miot);
+                        JsonObject miotResponse = miotResponse(miot);
+                        miotResponse.add("value", responseGen.getProperty(did(miot), integer(miot, "siid"),
+                                integer(miot, "piid")));
+                        miotresult.add(miotResponse);
                     }
                     fullCommand.add("result", miotresult);
+                    break;
+
+                case SET_PROPERTIES:
+                    JsonArray setResult = new JsonArray();
+                    for (JsonElement e : params.getAsJsonArray()) {
+                        JsonObject miot = e.getAsJsonObject();
+                        boolean ok = responseGen.setProperty(did(miot), integer(miot, "siid"), integer(miot, "piid"),
+                                miot.get("value"));
+                        JsonObject miotResponse = miotResponse(miot);
+                        // MIoT: 0 = ok, -4000 = device error
+                        miotResponse.addProperty("code", ok ? 0 : -4000);
+                        setResult.add(miotResponse);
+                    }
+                    fullCommand.add("result", setResult);
+                    break;
+
+                case ACTION:
+                    // unlike other commands the miot action parameters are a json object instead of an array
+                    JsonObject actionParams = params.isJsonArray() ? params.getAsJsonArray().get(0).getAsJsonObject()
+                            : params.getAsJsonObject();
+                    JsonObject actionResult = new JsonObject();
+                    Integer actionSiid = integer(actionParams, "siid");
+                    Integer actionAiid = integer(actionParams, "aiid");
+                    if (actionSiid == null || actionAiid == null) {
+                        // MIoT: -4000 = device error
+                        actionResult.addProperty("code", -4000);
+                    } else {
+                        actionResult.addProperty("code", 0);
+                        actionResult.add("out", responseGen.performAction(actionSiid, actionAiid));
+                    }
+                    fullCommand.add("result", actionResult);
                     break;
 
                 case GET_PROPERTY:
@@ -178,8 +207,30 @@ public class MiIoEmulator implements MiIoMessageListener {
         } catch (
 
         JsonSyntaxException e) {
-            logger.warn("Could not parse '{}' <- {} (Device: {}) gave error {}", response, socketAddress, e);
+            logger.warn("Could not parse '{}' <- {} gave error {}", response, socketAddress, e.getMessage());
+        } catch (RuntimeException e) {
+            logger.warn("Could not handle '{}' <- {}", response, socketAddress, e);
         }
+    }
+
+    private static String did(JsonObject miot) {
+        return miot.has("did") && !miot.get("did").isJsonNull() ? miot.get("did").getAsString() : null;
+    }
+
+    private static Integer integer(JsonObject json, String name) {
+        return json.has(name) && !json.get(name).isJsonNull() ? json.get(name).getAsInt() : null;
+    }
+
+    /** @return a MIoT response entry with the identifiers of the request and code 0 */
+    private static JsonObject miotResponse(JsonObject request) {
+        JsonObject response = new JsonObject();
+        for (String key : new String[] { "did", "siid", "piid" }) {
+            if (request.has(key)) {
+                response.add(key, request.get(key));
+            }
+        }
+        response.addProperty("code", 0);
+        return response;
     }
 
     private void sendResponse(JsonObject fullCommand, SocketAddress socketAddress) {

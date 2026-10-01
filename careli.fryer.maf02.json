@@ -1,0 +1,154 @@
+{
+  "model": "careli.fryer.maf02",
+  "ismiot": true,
+  "commands": [],
+  "properties": [
+    {
+      "property": "status",
+      "fakeresponse": 1,
+      "datatype": null,
+      "siid": 2,
+      "piid": 1
+    },
+    {
+      "property": "fault",
+      "fakeresponse": 0,
+      "datatype": null,
+      "siid": 2,
+      "piid": 2
+    },
+    {
+      "property": "target-time",
+      "fakeresponse": 15,
+      "datatype": null,
+      "siid": 2,
+      "piid": 3
+    },
+    {
+      "property": "target-temperature",
+      "fakeresponse": 180,
+      "datatype": null,
+      "siid": 2,
+      "piid": 4
+    },
+    {
+      "property": "left-time",
+      "fakeresponse": 0,
+      "datatype": null,
+      "siid": 2,
+      "piid": 5
+    },
+    {
+      "property": "recipe-id",
+      "fakeresponse": "",
+      "datatype": null,
+      "siid": 3,
+      "piid": 1
+    },
+    {
+      "property": "work-time",
+      "fakeresponse": 15,
+      "datatype": null,
+      "siid": 3,
+      "piid": 3
+    },
+    {
+      "property": "work-temp",
+      "fakeresponse": 180,
+      "datatype": null,
+      "siid": 3,
+      "piid": 4
+    },
+    {
+      "property": "appoint-time",
+      "fakeresponse": 0,
+      "datatype": null,
+      "siid": 3,
+      "piid": 5
+    },
+    {
+      "property": "food-quantity",
+      "fakeresponse": 1,
+      "datatype": null,
+      "siid": 3,
+      "piid": 6
+    },
+    {
+      "property": "preheat-switch",
+      "fakeresponse": 1,
+      "datatype": null,
+      "siid": 3,
+      "piid": 7
+    },
+    {
+      "property": "appoint-time-left",
+      "fakeresponse": 0,
+      "datatype": null,
+      "siid": 3,
+      "piid": 8
+    },
+    {
+      "property": "turn-pot",
+      "fakeresponse": 0,
+      "datatype": null,
+      "siid": 3,
+      "piid": 10
+    }
+  ],
+  "actions": [
+    {
+      "siid": 2,
+      "aiid": 1,
+      "sets": [
+        {
+          "siid": 2,
+          "piid": 1,
+          "value": 4
+        },
+        {
+          "siid": 2,
+          "piid": 5,
+          "value": 15
+        }
+      ]
+    },
+    {
+      "siid": 2,
+      "aiid": 2,
+      "sets": [
+        {
+          "siid": 2,
+          "piid": 1,
+          "value": 1
+        },
+        {
+          "siid": 2,
+          "piid": 5,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "siid": 2,
+      "aiid": 3,
+      "sets": [
+        {
+          "siid": 2,
+          "piid": 1,
+          "value": 2
+        }
+      ]
+    },
+    {
+      "siid": 3,
+      "aiid": 2,
+      "sets": [
+        {
+          "siid": 2,
+          "piid": 1,
+          "value": 4
+        }
+      ]
+    }
+  ]
+}
