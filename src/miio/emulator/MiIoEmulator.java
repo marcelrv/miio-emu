@@ -175,9 +175,15 @@ public class MiIoEmulator implements MiIoMessageListener {
                     JsonObject actionParams = params.isJsonArray() ? params.getAsJsonArray().get(0).getAsJsonObject()
                             : params.getAsJsonObject();
                     JsonObject actionResult = new JsonObject();
-                    actionResult.addProperty("code", 0);
-                    actionResult.add("out", responseGen.performAction(integer(actionParams, "siid"),
-                            integer(actionParams, "aiid")));
+                    Integer actionSiid = integer(actionParams, "siid");
+                    Integer actionAiid = integer(actionParams, "aiid");
+                    if (actionSiid == null || actionAiid == null) {
+                        // MIoT: -4000 = device error
+                        actionResult.addProperty("code", -4000);
+                    } else {
+                        actionResult.addProperty("code", 0);
+                        actionResult.add("out", responseGen.performAction(actionSiid, actionAiid));
+                    }
                     fullCommand.add("result", actionResult);
                     break;
 

@@ -171,9 +171,8 @@ public class MiIoReceiver {
 
     private DatagramSocket getSocket() throws SocketException {
         if (socket == null || socket.isClosed()) {
-            // reuse must be set before binding
+            // no address reuse: a second emulator on the same port must fail instead of sharing it
             DatagramSocket newSocket = new DatagramSocket(null);
-            newSocket.setReuseAddress(true);
             newSocket.setBroadcast(true);
             newSocket.bind(new InetSocketAddress(PORT));
             socket = newSocket;
