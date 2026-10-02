@@ -163,8 +163,9 @@ The default database folder is a path relative to the author's checkout layout, 
 - Point the client at the IP address of the machine running the emulator, UDP port 54321 (or the `miio.port` you set).
 - Use the emulator token and did, and the emulated model.
 - For the openHAB miio binding, configure a Thing with these parameters (`config.xml` of the binding): `host` (the IP
-  of the machine running the emulator), `token` (default `AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`), `deviceId` and `model`
-  (optional, the emulated model). The binding always uses port 54321.
+  of the machine running the emulator), `token` (required: enter the emulator's token, by default
+  `AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`), `deviceId` and `model` (optional, the emulated model). The binding always uses
+  port 54321.
 - `deviceId` is the did as a decimal number. For the default `AABBCCDD` that is `2864434397`; for another did convert
   the 8 hexadecimal characters to decimal. The binding still accepts a hexadecimal value that contains a letter, but
   logs a warning (`MiIoAbstractHandler`). Without a cloud server it then ignores the value and asks the device for its
@@ -289,7 +290,8 @@ by hand.
 
    For each MIoT action (an entry with `siid` and `aiid`) in a channel's `actions` it creates an action entry without
    `sets` or `out`.
-   `ismiot` is set to `true` if any `siid`/`piid` or action was found. Commands are not imported.
+   `ismiot` is set to `true` if a property has both `siid` and `piid`, or if a complete MIoT action (`siid` and `aiid`)
+   was found. Commands are not imported.
 1. Edit the generated `<model>.json` to the values and responses your client should see. In the interactive menu enter
    `r` after editing (see [Interactive menu](#interactive-menu)); in headless mode restart the emulator.
 1. Alternatively, capture what a client asks: run the model, connect the client, then use `s` in the interactive menu so
