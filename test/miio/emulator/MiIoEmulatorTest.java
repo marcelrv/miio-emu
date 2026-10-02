@@ -42,8 +42,13 @@ class MiIoEmulatorTest {
 
     @AfterEach
     void tearDown() {
-        client.close();
-        emulator.close();
+        // setUp can fail half way
+        if (client != null) {
+            client.close();
+        }
+        if (emulator != null) {
+            emulator.close();
+        }
     }
 
     private byte[] receive() throws IOException {

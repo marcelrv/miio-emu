@@ -259,9 +259,11 @@ public class MiIoEmulator implements MiIoMessageListener {
         comms.close();
     }
 
-    /** Stops the emulator without saving the responses */
+    /** Stops the emulator without saving the responses. Does nothing if it was not started. */
     public void close() {
-        comms.close();
+        if (comms != null) {
+            comms.close();
+        }
     }
 
     public void reload() {
